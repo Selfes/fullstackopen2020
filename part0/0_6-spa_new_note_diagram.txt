@@ -1,0 +1,14 @@
+title spa-new-note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+note over server:
+Server creates internally a note
+with the informationen provided
+by the HTTPS Post request
+end note
+server-->browser: Note created (Status 201)
+note over browser:
+The browser adds the node themselves
+to the webpage after getting the
+"created" message from the server
+end note
