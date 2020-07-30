@@ -25,12 +25,37 @@ const App = (props) => {
     return copy;
   }
 
+  // Use this function from Stackoverflow to find the index of the biggest number
+  // (according to him, it's more efficient)
+  // https://stackoverflow.com/a/11301464
+  function indexOfMax(arr) {
+    if (arr.length === 0) {
+        return -1;
+    }
+
+    var max = arr[0];
+    var maxIndex = 0;
+
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+
+    return maxIndex;
+  }
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{props.anecdotes[selected]}</p>
       <Vote counter={votes[selected]} />
       <Button text="vote" handleClick={() => setVotes(voteAnecdote(votes, selected))} />
       <Button text="next anecdote" handleClick={() => setSelected(selectRandomNumber())} />
+      <h1>Anecdote with most votes</h1>
+      <p>{props.anecdotes[indexOfMax(votes)]}</p>
+      <Vote counter={votes[indexOfMax(votes)]} />
     </div>
   )
 }
