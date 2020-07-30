@@ -1,3 +1,8 @@
+# Anecdotes Generator 
+This is the implemented React App for [Part 1](https://fullstackopen.com/en/part1) (Anecdotes Generator) in the [FullStack Open 2020 Course](http://fullstackopen.com). Please check the Commit History for all Exercise steps.
+
+* * *
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
