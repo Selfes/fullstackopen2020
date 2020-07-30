@@ -11,30 +11,20 @@ const Display = ({counter, text}) => (
   <p>{text} {counter}</p>
 )
 
-const StatCalc = ({good, bad, all}) => {
-  const average = (good-bad)/all;
-  const positive = good/all*100;
-  if (all) {
-    return (
-      <>
-        <Display counter={average} text="average" />
-        <Display counter={positive+"%"} text="positive" />
-      </>
-    )
-  } else {
-    return (<></>)
-  }
-}
 
 const Statistics = ({good, neutral, bad}) => {
   const all = good + neutral + bad;
+  const average = (good-bad)/all;
+  const positive = good/all*100;
+  if (!all) return (<p>No feedback given</p>)
   return (
     <>
       <Display counter={good} text="good" />
       <Display counter={neutral} text="neutral" />
       <Display counter={bad} text="bad" />
       <Display counter={all} text="all" />
-      <StatCalc good={good} bad={bad} all={all}/>
+      <Display counter={average} text="average" />
+      <Display counter={positive+"%"} text="positive" />
     </>
   )
 }
