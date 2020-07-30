@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Vote = ({counter}) => (<p>has {counter} votes</p>)
+
 const Button = (props) => (
   <button onClick={props.handleClick}>
     {props.text}
@@ -9,6 +11,7 @@ const Button = (props) => (
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(props.anecdotes.length).fill(0))
 
   // Random from Stackoverflow
   // (https://stackoverflow.com/questions/5708784/how-do-i-choose-a-random-value-from-an-array-with-javascript)
@@ -16,9 +19,17 @@ const App = (props) => {
     return Math.floor(Math.random() * props.anecdotes.length);
   }
 
+  const voteAnecdote = (points, selected) => {
+    const copy = [...points];
+    copy[selected] += 1;
+    return copy;
+  }
+
   return (
     <div>
       <p>{props.anecdotes[selected]}</p>
+      <Vote counter={votes[selected]} />
+      <Button text="vote" handleClick={() => setVotes(voteAnecdote(votes, selected))} />
       <Button text="next anecdote" handleClick={() => setSelected(selectRandomNumber())} />
     </div>
   )
