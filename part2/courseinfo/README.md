@@ -1,5 +1,5 @@
 # Course Informationen
-This is the implemented React App for [Part 1](https://fullstackopen.com/en/part1) (course info) in the [FullStack Open 2020 Course](http://fullstackopen.com). Please check the Commit History for all Exercise steps.
+This is the implemented React App for [Part 2](https://fullstackopen.com/en/part2) (course info) in the [FullStack Open 2020 Course](http://fullstackopen.com). Please check the Commit History for all Exercise steps.
 
 * * *
 
