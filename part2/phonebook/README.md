@@ -1,6 +1,11 @@
 # Course Informationen
 This is the implemented React App for [Part 2](https://fullstackopen.com/en/part2) (phonebook) in the [FullStack Open 2020 Course](http://fullstackopen.com). Please check the Commit History for all Exercise steps.
 
+## Dependencies
+* axios
+* json-server
+* concurrently (used in order to run two commands at the same time (`npm run dev`))
+
 * * *
 
 # Getting Started with Create React App
