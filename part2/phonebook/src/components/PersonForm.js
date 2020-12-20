@@ -9,7 +9,17 @@ const PersonForm = (props) => {
     const person = { name: props.name, number: props.number };
 
     if (props.persons.some((elem) => elem.name === props.name)) {
-      alert(`${props.name} is already added to phonebook`);
+      if (window.confirm(`${props.name} is already added to phonebook, replace the old number with a new one?`)) {
+        const findPerson = props.persons.find(p => p.name === props.name)
+        const changedPerson = {...findPerson, number: props.number }
+        personService
+          .update(changedPerson)
+          .then((updatePerson) => {
+            props.addPerson(props.persons.map(p => p.id !== updatePerson.id ? p : updatePerson));
+            props.nameSetter("");
+            props.numberSetter("");
+          })
+      }
       return;
     }
     personService
