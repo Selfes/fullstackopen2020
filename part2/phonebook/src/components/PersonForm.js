@@ -12,11 +12,16 @@ const PersonForm = (props) => {
       alert(`${props.name} is already added to phonebook`);
       return;
     }
-
-    props.addPerson(props.persons.concat(person));
-    props.nameSetter("");
-    props.numberSetter("");
-    return personService.create(person).then(response => response.data);
+    personService
+      .create(person)
+      .then((newPerson) => {
+        props.addPerson(props.persons.concat(newPerson));
+        props.nameSetter("");
+        props.numberSetter("");
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   };
 
   return (
