@@ -9,10 +9,22 @@ const Persons = (props) => {
         if (window.confirm(`Delete ${removePerson.name}`)) {
             personService
                 .remove(removePerson.id)
-                .then(() => props.changePersons(props.persons.filter(person => person.id !== removePerson.id)))
-            props.setMessage(`Removed ${removePerson.name}`)
-            props.error(false)
-            setTimeout(() => props.setMessage(''), 5000)
+                .then(() => {
+                    props.changePersons(props.persons.filter(person => person.id !== removePerson.id))
+                    props.error(false)
+                    props.setMessage(`Removed ${removePerson.name}`)
+                    setTimeout(() => props.setMessage(''), 5000)
+                }).catch((error) => {
+                    personService
+                        .getAll()
+                        .then((updatedPersonList) => {
+                            props.changePersons(updatedPersonList)
+                        })
+                    props.error(true)
+                    props.setMessage(`Information of ${removePerson.name} has already been removed from server`)
+                    setTimeout(() => props.setMessage(''), 5000)
+                })
+
         }
     }
 

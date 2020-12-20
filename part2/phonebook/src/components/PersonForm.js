@@ -31,13 +31,13 @@ const PersonForm = (props) => {
         props.addPerson(props.persons.concat(newPerson));
         props.nameSetter("");
         props.numberSetter("");
-        props.setMessage(`Added ${newPerson.name}`)
         props.error(false)
+        props.setMessage(`Added ${newPerson.name}`)
         setTimeout(() => props.setMessage(''), 5000)
       })
       .catch((error) => {
-        props.setMessage(error)
         props.error(true)
+        props.setMessage(error)
         setTimeout(() => props.setMessage(''), 5000)
       })
   };
