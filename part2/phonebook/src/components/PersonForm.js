@@ -1,5 +1,6 @@
 import React from "react";
-import axios from "axios"
+
+import personService from '../services/persons'
 
 const PersonForm = (props) => {
 
@@ -15,7 +16,7 @@ const PersonForm = (props) => {
     props.addPerson(props.persons.concat(person));
     props.nameSetter("");
     props.numberSetter("");
-    return axios.post("http://localhost:3001/persons", person).then(response => response.data);
+    return personService.create(person).then(response => response.data);
   };
 
   return (
