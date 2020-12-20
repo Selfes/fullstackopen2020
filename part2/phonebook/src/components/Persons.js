@@ -10,6 +10,9 @@ const Persons = (props) => {
             personService
                 .remove(removePerson.id)
                 .then(() => props.changePersons(props.persons.filter(person => person.id !== removePerson.id)))
+            props.setMessage(`Removed ${removePerson.name}`)
+            props.error(false)
+            setTimeout(() => props.setMessage(''), 5000)
         }
     }
 

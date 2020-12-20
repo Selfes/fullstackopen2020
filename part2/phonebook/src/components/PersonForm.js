@@ -18,6 +18,9 @@ const PersonForm = (props) => {
             props.addPerson(props.persons.map(p => p.id !== updatePerson.id ? p : updatePerson));
             props.nameSetter("");
             props.numberSetter("");
+            props.setMessage(`Updated ${updatePerson.name}`)
+            props.error(false)
+            setTimeout(() => props.setMessage(''), 5000)
           })
       }
       return;
@@ -28,9 +31,14 @@ const PersonForm = (props) => {
         props.addPerson(props.persons.concat(newPerson));
         props.nameSetter("");
         props.numberSetter("");
+        props.setMessage(`Added ${newPerson.name}`)
+        props.error(false)
+        setTimeout(() => props.setMessage(''), 5000)
       })
       .catch((error) => {
-        console.log(error)
+        props.setMessage(error)
+        props.error(true)
+        setTimeout(() => props.setMessage(''), 5000)
       })
   };
 
