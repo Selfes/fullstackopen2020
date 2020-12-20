@@ -1,3 +1,14 @@
+# Course Informationen
+This is the implemented React App for [Part 2](https://fullstackopen.com/en/part2) (data countries) in the [FullStack Open 2020 Course](http://fullstackopen.com). Please check the Commit History for all Exercise steps.
+
+## Dependencies
+* axios
+
+## Weather
+For the Weather, I use [OpenWeather](https://openweathermap.org) (since I don't have to state my personal info). In my case I added a `.env` with `REACT_APP_API_KEY` as the environment variable for the API key. But it should also work in the Terminal by running `REACT_APP_API_KEY={api_key} npm start` 
+
+* * *
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
