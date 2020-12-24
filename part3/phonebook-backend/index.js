@@ -30,6 +30,10 @@ const generateId = () => {
 
 app.use(express.json())
 
+const morgan = require('morgan')
+app.use(morgan('tiny'))
+
+
 app.get('/api/persons', (request, response) => {
     response.json(persons)
 })
