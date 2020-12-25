@@ -13,7 +13,7 @@ I have added a npm command called `build:ui` in order to build and copy the `bui
 For Exercise 3.10, based on [this post](https://medium.com/@shalandy/deploy-git-subdirectory-to-heroku-ea05e95fce1f) on Medium, I had to deploy using a git subtree pointing to the backend directory. 
 You can find the backend on http://floating-hollows-23285.herokuapp.com/
 
-My steps how to do it:
+My steps how I did it (in the root of the git repository):
 
     heroku create
     git subtree push --prefix part3/phonebook-backend heroku master
