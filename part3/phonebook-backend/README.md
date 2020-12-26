@@ -2,10 +2,13 @@
 This is the implemented React App for [Part 3](https://fullstackopen.com/en/part3) (phonebook-backend) in the [FullStack Open 2020 Course](http://fullstackopen.com). Please check the Commit History for all Exercise steps.
 
 ## Dependencies
-* expressjs
-* cors
-* morgan
-* nodemon (for development purposes)
+* [expressjs](https://expressjs.com/)
+* [cors](https://github.com/expressjs/cors)
+* [morgan](https://github.com/expressjs/morgan)
+* [nodemon](https://nodemon.io/) (for development purposes)
+* [dotenv](https://github.com/motdotla/dotenv)
+* [mongoose](https://mongoosejs.com/)
+* [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator)
 
 ## How to run
 I have added a npm command called `build:ui` in order to build and copy the `build` from part 2 here. The Frontend needs to be 2 folders above this folder in order to run it (or just copy from `build` in part 2). In order to execute it, just run `npm run build:ui` and then `npm start`.
