@@ -26,4 +26,4 @@ Then you should be able to access it.
 ### Update
 For Exercise 3.21, I updated the web app in heroku. You can still find the backend on http://floating-hollows-23285.herokuapp.com/
 For this application I used a `.env` to store the `MONGODB_URI` and the `PORT` environment variable and used, as described in
-'Validation and ESLint' in Part 3, `heroku config:set MONGODB_URI='<MONGODB_URI>'` to set the environment variable
+'Validation and ESLint' in Part 3, `heroku config:set MONGODB_URI='<MONGODB_URI>'` to set the environment variable 
