@@ -92,7 +92,7 @@ app.get('/info', (request, response) => {
     response.send(`Phonebook has info for ${persons.length} people <br><br> ${new Date()}`);
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response, next) => {
     //const id = Number(request.params.id)
     //const person = persons.find((person) => person.id === id)
 
@@ -103,8 +103,12 @@ app.get('/api/persons/:id', (request, response) => {
     //}
 
     Person.findById(request.params.id).then(entry => {
-        response.json(entry)
-    })
+        if (entry) {
+            response.json(entry)
+        } else {
+            response.status(404).end()
+        }
+    }).catch((error) => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
@@ -117,8 +121,20 @@ app.delete('/api/persons/:id', (request, response, next) => {
           .then((result) => {
               response.status(204).end()
           })
-          .catch((error) => next(error))
 })
+
+// just copy pasted from the fullstack git repo
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+    return response.status(400).send({ error: 'malformatted id' })
+  }
+
+  next(error)
+}
+
+app.use(errorHandler)
 
 // Port listening
 const PORT = process.env.PORT || 3001;
