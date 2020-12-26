@@ -96,7 +96,7 @@ app.put('/api/persons/:id', (request, response, next) => {
         number: body.number
     }
 
-    Person.findByIdAndUpdate(request.params.id, newEntry, { new: true })
+    Person.findByIdAndUpdate(request.params.id, newEntry, { runValidators: true, context: 'query', new: true })
           .then((updatedEntry) => response.json(updatedEntry.toJSON()))
           .catch((error) => next(error))
 })
@@ -140,7 +140,9 @@ app.delete('/api/persons/:id', (request, response, next) => {
     Person.findByIdAndDelete(request.params.id)
           .then((result) => {
               response.status(204).end()
-          }).catch((error) => next(error))
+          }).catch((error) => {
+              next(error)
+          })
 })
 
 
