@@ -123,7 +123,12 @@ app.delete('/api/persons/:id', (request, response, next) => {
           })
 })
 
+
 // just copy pasted from the fullstack git repo
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
@@ -134,6 +139,8 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
+// handler of requests with unknown endpoint
+app.use(unknownEndpoint)
 app.use(errorHandler)
 
 // Port listening
