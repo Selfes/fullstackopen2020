@@ -84,7 +84,7 @@ app.post('/api/persons', (request, response) => {
     //response.json(person)
 
     person.save().then(entry => {
-        response.json(entry)
+        response.json(entry.toJSON())
     })
 })
 
@@ -97,7 +97,7 @@ app.put('/api/persons/:id', (request, response, next) => {
     }
 
     Person.findByIdAndUpdate(request.params.id, newEntry, { new: true})
-          .then((updatedEntry) => response.json(updatedEntry))
+          .then((updatedEntry) => response.json(updatedEntry.toJSON()))
           .catch((error) => next(error))
 })
 
@@ -124,7 +124,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 
     Person.findById(request.params.id).then(entry => {
         if (entry) {
-            response.json(entry)
+            response.json(entry.toJSON())
         } else {
             response.status(404).end()
         }
