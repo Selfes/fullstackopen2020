@@ -10,6 +10,7 @@
     "deploy": "cd ../../ && git subtree push --prefix part3/phonebook-backend heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m \"Part3 (Production build test)\" && npm run deploy",
     "logs:prod": "heroku logs -t",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -23,6 +24,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^7.16.0",
     "nodemon": "^2.0.6"
   }
 }
