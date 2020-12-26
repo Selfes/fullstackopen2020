@@ -62,21 +62,30 @@ app.post('/api/persons', (request, response) => {
             error: 'the name or number is missing'
         })
     }
-    if (persons.some((elem) => elem.name === body.name)) {
-        return response.status(400).json({
-            error: 'name must be unique'
-        })
-    }
+    //if (persons.some((elem) => elem.name === body.name)) {
+    //    return response.status(400).json({
+    //        error: 'name must be unique'
+    //    })
+    //}
 
-    const person = {
-        id: generateId(),
+    //const person = {
+    //    id: generateId(),
+    //    name: body.name,
+    //    number: body.number
+    //}
+
+    const person = new Person({
         name: body.name,
         number: body.number
-    }
+    })
 
-    persons = persons.concat(person)
+    //persons = persons.concat(person)
 
-    response.json(person)
+    //response.json(person)
+
+    person.save().then(entry => {
+        response.json(entry)
+    })
 })
 
 app.get('/info', (request, response) => {
