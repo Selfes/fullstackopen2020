@@ -102,7 +102,14 @@ app.put('/api/persons/:id', (request, response, next) => {
 })
 
 app.get('/info', (request, response) => {
-    response.send(`Phonebook has info for ${persons.length} people <br><br> ${new Date()}`);
+    Person.estimatedDocumentCount((error, count) => {
+       if (error) {
+           console.log(error)
+           response.status(500).send({ error: "Problem with accessing the database"})
+       } else {
+           response.send(`Phonebook has info for ${count} people <br><br> ${new Date()}`);
+       }
+    })
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
