@@ -10,4 +10,15 @@ const totalLikes = (blogs) => {
   return blogs.reduce(reducer, 0)
 }
 
-module.exports = { dummy, totalLikes }
+const favoriteBlog = (blogs) => {
+  if (blogs.length === 0) {
+    return {}
+  }
+  let res = blogs.reduce((currElem, nextElem) => (+currElem.likes > +nextElem.likes) ? currElem : nextElem)
+  delete res.__v
+  delete res._id
+  delete res.url
+  return res
+}
+
+module.exports = { dummy, totalLikes, favoriteBlog }
