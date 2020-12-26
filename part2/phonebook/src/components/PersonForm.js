@@ -22,11 +22,6 @@ const PersonForm = (props) => {
             props.error(false)
             setTimeout(() => props.setMessage(''), 5000)
           })
-          .catch((error) => {
-            props.error(true)
-            props.setMessage(error.response.data.error)
-            setTimeout(() => props.setMessage(''), 5000)
-          })
       }
       return;
     }
@@ -42,7 +37,7 @@ const PersonForm = (props) => {
       })
       .catch((error) => {
         props.error(true)
-        props.setMessage(error.response.data.error)
+        props.setMessage(error)
         setTimeout(() => props.setMessage(''), 5000)
       })
   };
