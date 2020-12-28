@@ -31,12 +31,27 @@ test('blogs are correctly fetched', async () => {
   expect(response.body).toHaveLength(6)
 })
 
-// test('blogs id are defined', async () => {
-//   const api await api
-//     .get('/api/blogs')
-//     .expect(200)
-//     .expect('Content-Type', /application\/json/)
-// })
+test('blogs id are defined', async () => {
+  const newBlog = {
+    title: 'How To Ask Questions The Smart Way',
+    author: 'Eric S. Raymond',
+    url: 'http://catb.org/%7Eesr/faqs/smart-questions.html',
+    likes: 31
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  expect(response.body[response.body.length-1].id).toBeDefined()
+})
 
 afterAll(() => {
   mongoose.connection.close()
