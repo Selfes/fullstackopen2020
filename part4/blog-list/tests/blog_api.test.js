@@ -118,6 +118,29 @@ test('blog gets removed', async () => {
   expect(urls).not.toContain(url)
 })
 
+test('likes of blog get updated', async () => {
+  const response = await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const title = response.body[0].title
+  const url = response.body[0].url
+
+  await api
+    .put(('/api/blogs/' + response.body[0].id))
+    .send({ likes: (response.body[0].likes + 3) })
+    .expect(200)
+
+  const secondResponse = await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  expect(secondResponse.body.filter((elem) => (elem.title === title && elem.url === url))[0].likes)
+    .toBe(blog_api_helper.dummyBlogs.filter((elem) => (elem.title === title && elem.url === url))[0].likes + 3)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
