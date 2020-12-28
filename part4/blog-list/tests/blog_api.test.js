@@ -24,11 +24,19 @@ beforeEach(async () => {
 })
 
 test('blogs are correctly fetched', async () => {
-  await api
-    .get('/api/blogs')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
+  const response = await api.get('/api/blogs')
+                            .expect(200)
+                            .expect('Content-Type', /application\/json/)
+
+  expect(response.body).toHaveLength(6)
 })
+
+// test('blogs id are defined', async () => {
+//   const api await api
+//     .get('/api/blogs')
+//     .expect(200)
+//     .expect('Content-Type', /application\/json/)
+// })
 
 afterAll(() => {
   mongoose.connection.close()
