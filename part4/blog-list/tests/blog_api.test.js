@@ -34,7 +34,7 @@ test('blogs are correctly fetched', async () => {
 test('blogs id are defined', async () => {
   await api
     .post('/api/blogs')
-    .send(blog_api_helper.newBlog)
+    .send(blog_api_helper.newBlogValid)
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
@@ -50,7 +50,7 @@ test('blogs id are defined', async () => {
 test('a valid blog is added', async () => {
   await api
     .post('/api/blogs')
-    .send(blog_api_helper.newBlog)
+    .send(blog_api_helper.newBlogValid)
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
@@ -63,6 +63,21 @@ test('a valid blog is added', async () => {
 
   expect(response.body).toHaveLength(blog_api_helper.dummyBlogs.length + 1)
   expect(contents).toContain('How To Ask Questions The Smart Way')
+})
+
+test('blog without likes property correctly added', async () => {
+  await api
+    .post('/api/blogs')
+    .send(blog_api_helper.newBlogLikes)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  expect(response.body.filter((elem) => (elem.author === 'Paul Graham' && elem.title === "Being A Noob"))[0].likes).toBe(0)
 })
 
 afterAll(() => {
