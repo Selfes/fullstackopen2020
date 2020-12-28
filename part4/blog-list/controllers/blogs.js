@@ -8,7 +8,7 @@ blogRouter.get('/', async (request, response) => {
   response.json(blogs)
 })
 
-blogRouter.post('/', async (request, response) => {
+blogRouter.post('/', async (request, response, next) => {
   const blog = new Blog(request.body)
 
   if (!('likes' in blog)) {
@@ -17,8 +17,16 @@ blogRouter.post('/', async (request, response) => {
     blog.likes = 0
   }
 
-  const result = await blog.save()
-  response.status(201).json(result)
+  try {
+    const result = await blog.save()
+    response.status(201).json(result)
+  } catch (exception) {
+    if (exception.name === 'ValidationError') {
+      response.status(400).json({ error: exception.message })
+    } else {
+      next(exception)
+    }
+  }
 })
 
 module.exports = blogRouter

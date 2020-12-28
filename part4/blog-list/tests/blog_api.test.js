@@ -80,6 +80,18 @@ test('blog without likes property correctly added', async () => {
   expect(response.body.filter((elem) => (elem.author === 'Paul Graham' && elem.title === "Being A Noob"))[0].likes).toBe(0)
 })
 
+test('blog without likes property correctly added', async () => {
+  await api
+    .post('/api/blogs')
+    .send(blog_api_helper.badBlogPost1)
+    .expect(400)
+
+  await api
+    .post('/api/blogs')
+    .send(blog_api_helper.badBlogPost2)
+    .expect(400)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })

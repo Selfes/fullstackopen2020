@@ -73,4 +73,16 @@ const newBlogLikes = {
   url: 'http://www.paulgraham.com/noob.html'
 }
 
-module.exports = { listWithOneBlog, dummyBlogs, newBlogValid, newBlogLikes }
+const badBlogPost1 = {
+  title: 'Thoughts on Flash',
+  author: 'Steve Jobs',
+  likes: '3'
+}
+
+const badBlogPost2 = {
+  author: 'Bill Gates',
+  url: 'https://www.gatesnotes.com/Books/The-Ride-of-a-Lifetime',
+  likes: '0'
+}
+
+module.exports = { listWithOneBlog, dummyBlogs, newBlogValid, newBlogLikes, badBlogPost1, badBlogPost2 }
