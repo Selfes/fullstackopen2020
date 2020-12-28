@@ -32,16 +32,9 @@ test('blogs are correctly fetched', async () => {
 })
 
 test('blogs id are defined', async () => {
-  const newBlog = {
-    title: 'How To Ask Questions The Smart Way',
-    author: 'Eric S. Raymond',
-    url: 'http://catb.org/%7Eesr/faqs/smart-questions.html',
-    likes: 31
-  }
-
   await api
     .post('/api/blogs')
-    .send(newBlog)
+    .send(blog_api_helper.newBlog)
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
@@ -50,7 +43,26 @@ test('blogs id are defined', async () => {
     .expect(200)
     .expect('Content-Type', /application\/json/)
 
+  expect(response.body[0].id).toBeDefined()
   expect(response.body[response.body.length-1].id).toBeDefined()
+})
+
+test('a valid blog is added', async () => {
+  await api
+    .post('/api/blogs')
+    .send(blog_api_helper.newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const contents = response.body.map(r => r.title)
+
+  expect(response.body).toHaveLength(blog_api_helper.dummyBlogs.length + 1)
+  expect(contents).toContain('How To Ask Questions The Smart Way')
 })
 
 afterAll(() => {

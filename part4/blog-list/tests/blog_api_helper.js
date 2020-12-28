@@ -60,4 +60,11 @@ const dummyBlogs = [
   }
 ]
 
-module.exports = { listWithOneBlog, dummyBlogs }
+const newBlog = {
+  title: 'How To Ask Questions The Smart Way',
+  author: 'Eric S. Raymond',
+  url: 'http://catb.org/%7Eesr/faqs/smart-questions.html',
+  likes: 31
+}
+
+module.exports = { listWithOneBlog, dummyBlogs, newBlog }
