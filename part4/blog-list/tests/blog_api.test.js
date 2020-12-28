@@ -80,7 +80,7 @@ test('blog without likes property correctly added', async () => {
   expect(response.body.filter((elem) => (elem.author === 'Paul Graham' && elem.title === "Being A Noob"))[0].likes).toBe(0)
 })
 
-test('blog without likes property correctly added', async () => {
+test('invalid blogs not added', async () => {
   await api
     .post('/api/blogs')
     .send(blog_api_helper.badBlogPost1)
@@ -90,6 +90,32 @@ test('blog without likes property correctly added', async () => {
     .post('/api/blogs')
     .send(blog_api_helper.badBlogPost2)
     .expect(400)
+})
+
+test('blog gets removed', async () => {
+  const response = await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const title = response.body[0].title
+  const url = response.body[0].url
+
+  await api
+    .delete(('/api/blogs/' + response.body[0].id))
+    .expect(204)
+
+  const secondResponse = await api
+    .get('/api/blogs')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const titles = secondResponse.body.map(r => r.title)
+  const urls = secondResponse.body.map(r => r.url)
+
+  expect(secondResponse.body).toHaveLength(blog_api_helper.dummyBlogs.length - 1)
+  expect(titles).not.toContain(title)
+  expect(urls).not.toContain(url)
 })
 
 afterAll(() => {
