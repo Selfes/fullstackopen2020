@@ -3,7 +3,7 @@ import Country from './Country'
 
 const Countries = (props) => {
 
-    const showCountries = props.filter ? props.countries.filter((country) => country.name.toLowerCase().includes(props.filter.toLowerCase())) : []
+    const showCountries = props.filter ? props.countries.filter((country) => country.name.common.toLowerCase().includes(props.filter.toLowerCase())) : []
 
     // inspired by https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
     const showCountry = (country) => {
@@ -30,15 +30,15 @@ const Countries = (props) => {
     return (
         <div>
         {showCountries.map((country) => (
-            <span key={country.name}>
-              <p key={country.name}>
-                {country.name}
-                <button key={"btn-"+country.name} id={"btn-"+country.name} onClick={() => showCountry(country.name)}>
+            <span key={country.name.common}>
+              <p key={country.name.common}>
+                {country.name.common}
+                <button key={"btn-"+country.name.common} id={"btn-"+country.name.common} onClick={() => showCountry(country.name.common)}>
                   show
                 </button>
               </p>
-              <div style={{display: "none"}} key={"info-" + country.name} id={"info-" + country.name}>
-                <Country key={"country-" + country.name} country={country} />
+              <div style={{display: "none"}} key={"info-" + country.name.common} id={"info-" + country.name.common}>
+                <Country key={"country-" + country.name.common} country={country} />
               </div>
             </span>
         ))}

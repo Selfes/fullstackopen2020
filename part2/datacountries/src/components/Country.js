@@ -4,15 +4,15 @@ import Weather from './Weather'
 const Country = ({country}) => {
     return (
         <div>
-          <h1>{country.name}</h1>
+          <h1>{country.name.common}</h1>
           <p>capital {country.capital} <br />
             population {country.population}</p>
           <h2>Spoken languages</h2>
           <ul>
-            {country.languages.map(language => <li key={language["iso639_1"]}>{language.name}</li>)}
+            {Object.keys(country.languages).map(langcode => <li key={langcode}>{country.languages[langcode]}</li>)}
           </ul>
-          <img src={country.flag} alt={country.name + " flag"} height="100px" />
-        <Weather city={country.capital} country={country.alpha2Code}/>
+          <img src={country.flags.png} alt={country.name.common + " flag"} height="100px" />
+        <Weather city={country.capital} country={country.cca2}/>
         </div>
     )
 }
